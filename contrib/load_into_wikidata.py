@@ -19,6 +19,12 @@ class Airport(NamedTuple):
     timezone_name: Optional[str]
 
 
+def get_oauth_token(oauth_json_file: str) -> str:
+    with open(oauth_json_file, "r", encoding="utf-8") as f:
+        j = json.load(f)
+    return j["access_token"]
+
+
 def get_iana_timezone_to_wikidata(
     iana_timezone_query: str,
     sparql_endpoint: str,
@@ -138,6 +144,11 @@ def main():
         help="File containing query to obtain the items that define airports."
     )
     parser.add_argument(
+        "--oauth-config",
+        dest="oauth_config", metavar="OAUTH.JSON", default="wikidata_oauth.json",
+        help="File containing Wikimedia OAuth credentials."
+    )
+    parser.add_argument(
         dest="icao_to_timezone", metavar="ICAO_TO_TIMEZONE",
         help="File containing mappings of ICAO airport codes to IANA timezones.",
     )
@@ -147,6 +158,7 @@ def main():
         iana_timezone_query = f.read()
     with open(args.airport_icao_query, "r", encoding="utf-8") as f:
         airport_icao_query = f.read()
+    oauth_token = get_oauth_token(args.oauth_config)
 
     iana_timezone_to_wikidata = get_iana_timezone_to_wikidata(
         iana_timezone_query,
@@ -160,6 +172,7 @@ def main():
     )
     icao_to_timezone = get_icao_to_timezone(args.icao_to_timezone)
 
+    bearer_token = f"Bearer {oauth_token}"
     for _icao, airport in sorted(icao_to_airport.items()):
         if airport.timezone_entity is not None:
             # we already know the timezone
@@ -190,6 +203,7 @@ def main():
             },
             headers={
                 "User-Agent": USER_AGENT,
+                "Authorization": bearer_token,
             },
         )
 

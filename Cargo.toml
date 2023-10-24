@@ -1,0 +1,15 @@
+[package]
+name = "airfield-timezones"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+parsing_hacks = []
+
+[dependencies]
+clap = { version = "4.4", features = ["derive"] }
+once_cell = { version = "1.18" }
+pdf = { version = "0.8" }
+regex = { version = "1.10" }
+serde = { version = "1.0.189", features = ["derive"] }
+toml = { version = "0.8" }

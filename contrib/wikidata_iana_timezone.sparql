@@ -1,0 +1,6 @@
+SELECT ?timezone ?zoneName
+WHERE
+{
+  ?timezone wdt:P31 wd:Q17272692. # ?timezone instance-of IANA-timezone
+  ?timezone wdt:P6687 ?zoneName. # ?timezone has-IANA-timezone-ID ?zoneName
+}

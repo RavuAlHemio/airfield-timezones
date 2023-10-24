@@ -1,0 +1,132 @@
+[puerto_rico]
+icao_match = "^T[IJ][A-Z]{2}$"
+iana = "America/Puerto_Rico"
+utc_standard = -4
+
+[eastern]
+icao_match = "^K[A-Z]{3}$"
+iana = "America/New_York"
+utc_standard = -5
+utc_daylight = -4
+
+[central]
+icao_match = "^K[A-Z]{3}$"
+iana = "America/Chicago"
+utc_standard = -6
+utc_daylight = -5
+
+[mountain]
+icao_match = "^K[A-Z]{3}$"
+iana = "America/Denver"
+utc_standard = -7
+utc_daylight = -6
+
+[mountain_nodst]
+icao_match = "^K[A-Z]{3}$"
+iana = "America/Phoenix"
+utc_standard = -7
+# no DST
+
+[pacific]
+icao_match = "^K[A-Z]{3}$"
+iana = "America/Los_Angeles"
+utc_standard = -8
+utc_daylight = -7
+
+[alaska]
+icao_match = "^P[AFOP][A-Z]{2}$"
+iana = "America/Juneau"
+utc_standard = -9
+utc_daylight = -8
+
+[aleutian]
+icao_match = "^PA[A-Z]{2}$"
+iana = "America/Adak"
+utc_standard = -10
+utc_daylight = -9
+
+[hawaii]
+icao_match = "^P[A-Z]{3}$"
+iana = "Pacific/Honolulu"
+utc_standard = -10
+# no DST
+
+[tern_island]
+icao_match = "^P[A-Z]{3}$"
+iana = "Pacific/Midway"
+utc_standard = -11
+# no DST
+
+[american_samoa]
+icao_match = "^N[A-Z]{3}$"
+iana = "Pacific/Pago_Pago"
+utc_standard = -11
+# no DST
+
+[kiritimati]
+icao_match = "^P[A-Z]{3}$"
+iana = "Pacific/Kiritimati"
+utc_standard = 14
+# no DST
+
+[marshall_islands]
+icao_match = "^P[A-Z]{3}$"
+iana = "Pacific/Tarawa"
+utc_standard = 12
+# no DST
+
+[micronesia]
+icao_match = "^PT[A-Z]{2}$"
+iana = "Pacific/Kosrae"
+utc_standard = 11
+
+[micronesia_chuuk]
+icao_match = "^PT[A-Z]{2}$"
+iana = "Pacific/Port_Moresby"
+utc_standard = 10
+
+[guam]
+icao_match = "^PG[A-Z]{2}$"
+iana = "Pacific/Guam"
+utc_standard = 10
+
+[palau]
+icao_match = "^PT[A-Z]{2}$"
+iana = "Pacific/Palau"
+utc_standard = 9
+
+[east_labrador]
+icao_match = "^C[A-Z]{3}$"
+iana = "America/Goose_Bay"
+utc_standard = -4
+utc_daylight = -3
+
+[quebec]
+icao_match = "^C[A-Z]{3}$"
+iana = "America/Toronto"
+utc_standard = -5
+utc_daylight = -4
+
+[manitoba]
+icao_match = "^C[A-Z]{3}$"
+iana = "America/Winnipeg"
+utc_standard = -6
+utc_daylight = -5
+
+[saskatchewan]
+icao_match = "^C[A-Z]{3}$"
+iana = "America/Regina"
+utc_standard = -6
+# no DST
+
+[alberta]
+icao_match = "^C[A-Z]{3}$"
+iana = "America/Edmonton"
+utc_standard = -7
+utc_daylight = -6
+
+[british_columbia]
+icao_match = "^C[A-Z]{3}$"
+iana = "America/Vancouver"
+utc_standard = -8
+utc_daylight = -7

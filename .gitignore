@@ -1,0 +1,3 @@
+/target
+src/pdf_reading/encoding.rs
+contrib/wikidata_*.json

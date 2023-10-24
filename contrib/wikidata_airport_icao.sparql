@@ -1,0 +1,15 @@
+SELECT ?airport ?airportLabel ?icaoCode ?timezone ?zoneName
+WHERE
+{
+  { ?airport wdt:P31 wd:Q1248784. } # ?airport instance-of airport
+  UNION
+  { ?airport wdt:P31 wd:Q644371. } # ?airport instance-of international-airport
+
+  ?airport wdt:P239 ?icaoCode. # ?airport has-ICAO-code ?icaoCode
+  OPTIONAL {
+    ?airport wdt:P421 ?timezone. # ?airport is-in-time-zone ?timezone
+    ?timezone wdt:P31 wd:Q17272692. # ?timezone instance-of IANA-timezone
+    ?timezone wdt:P6687 ?zoneName. # ?timezone has-IANA-timezone-ID ?zoneName
+  }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". } # gimme names in English (?airport -> ?airportLabel)
+}

@@ -226,6 +226,8 @@ def main():
                 "Authorization": bearer_token,
             },
         )
+        print(claim_response.status_code)
+        print(claim_response.text)
 
 
 if __name__ == "__main__":

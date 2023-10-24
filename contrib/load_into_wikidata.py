@@ -189,9 +189,26 @@ def main():
             raise ValueError(f"timezone entity {timezone_entity!r} is invalid")
         timezone_entity_id = int(timezone_entity_match.group("numeric"))
 
-        claim = requests.post(
+        csrf_token_response = requests.get(
             args.api_endpoint,
             params={
+                "format": "json",
+                "action": "query",
+                "meta": "tokens",
+                "type": "csrf",
+            },
+            headers={
+                "User-Agent": USER_AGENT,
+                "Authorization": bearer_token,
+            },
+        )
+        csrf_token_response.raise_for_status()
+        csrf_token = csrf_token_response.json()["query"]["tokens"]["csrftoken"]
+
+        claim_response = requests.post(
+            args.api_endpoint,
+            params={
+                "format": "json",
                 "action": "wbcreateclaim",
                 "entity": airport.entity,
                 "property": PROPERTY_LOCATED_IN_TIME_ZONE,
@@ -200,6 +217,9 @@ def main():
                     "entity-type": "item",
                     "numeric-id": timezone_entity_id,
                 }),
+            },
+            data={
+                "token": csrf_token,
             },
             headers={
                 "User-Agent": USER_AGENT,

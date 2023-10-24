@@ -7,6 +7,7 @@ import requests
 
 
 PROPERTY_LOCATED_IN_TIME_ZONE = "P421"
+USER_AGENT = "AirfieldTimezones (https://github.com/RavuAlHemio/airfield-timezones)"
 ENTITY_RE = re.compile("^Q(?P<numeric>[0-9]+)$")
 
 
@@ -33,6 +34,9 @@ def get_iana_timezone_to_wikidata(
             data={
                 "query": iana_timezone_query,
                 "format": "json",
+            },
+            headers={
+                "User-Agent": USER_AGENT,
             },
         )
         timezones_response.raise_for_status()
@@ -61,6 +65,9 @@ def get_icao_to_airport(
             data={
                 "query": airport_icao_query,
                 "format": "json",
+            },
+            headers={
+                "User-Agent": USER_AGENT,
             },
         )
         airports_response.raise_for_status()
@@ -180,6 +187,9 @@ def main():
                     "entity-type": "item",
                     "numeric-id": timezone_entity_id,
                 }),
+            },
+            headers={
+                "User-Agent": USER_AGENT,
             },
         )
 

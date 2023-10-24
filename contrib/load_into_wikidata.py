@@ -149,10 +149,24 @@ def main():
         help="File containing Wikimedia OAuth credentials."
     )
     parser.add_argument(
+        "--airport",
+        dest="airport", metavar="ICAO", default=None,
+        help="ICAO code of airport to import."
+    )
+    parser.add_argument(
+        "--yes-all-airports",
+        dest="yes_all_airports", action="store_true",
+        help="Whether to actually import all airports."
+    )
+    parser.add_argument(
         dest="icao_to_timezone", metavar="ICAO_TO_TIMEZONE",
         help="File containing mappings of ICAO airport codes to IANA timezones.",
     )
     args = parser.parse_args()
+    if args.airport is None and not args.yes_all_airports:
+        raise ValueError("either '--airport ICAO' or '--yes-all-airports' must be passed")
+    if args.airport is not None and args.yes_all_airports:
+        raise ValueError("'--airport ICAO' and '--yes-all-airports' may not be passed simultaneously")
 
     with open(args.iana_timezone_query, "r", encoding="utf-8") as f:
         iana_timezone_query = f.read()
@@ -174,6 +188,9 @@ def main():
 
     bearer_token = f"Bearer {oauth_token}"
     for _icao, airport in sorted(icao_to_airport.items()):
+        if airport.icao != args.airport and not args.yes_all_airports:
+            continue
+
         if airport.timezone_entity is not None:
             # we already know the timezone
             continue
